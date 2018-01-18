@@ -19,12 +19,12 @@ Import as Android Studio project. Should build "as is". PGP signed tagged releas
 #### Receiving:
 
 1. launch app.
-2. incoming SMS using the payload format decsribe below will be intercepted and parsed to reconstitute the signed hex transaction.
+2. incoming SMS using the payload format described below will be intercepted and parsed to reconstitute the signed hex transaction.
 3. upon validation of the transaction hash, the transaction will be broadcast via the Samourai node pushTx.
 
 ### SMS payload format:
 
-The format used is a simple JSON object for each SMS. Each SMS transmits a segment. The sending app breaks down a transaction into a sequence of segments and the receiving app sequentially parses the segments to  
+The format used is a simple JSON object for each SMS. Each SMS transmits a segment. The sending app breaks down a transaction into a sequence of segments and the receiving app sequentially parses the segments to reconstruct the signed transaction. 
 
 "s" : *integer*, number of SMS segments for this transaction. Only used in the first SMS for a given transaction.
 
