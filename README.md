@@ -38,7 +38,7 @@ The format used is a simple JSON object for each SMS. Each SMS transmits a segme
 
 "t" : hex transaction data or this segment.
 
-### TBD:
+### TODO - Contributions and PRs encouraged:
 
 * run SMS receiver broadcast as a service
 * manage several SMS relays
