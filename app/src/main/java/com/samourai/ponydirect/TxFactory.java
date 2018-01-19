@@ -29,6 +29,8 @@ public class TxFactory {
     private static TxFactory instance = null;
     private static Context context = null;
 
+    private static int messageIdx = 1;
+
     private TxFactory() { ; }
 
     public static TxFactory getInstance(Context ctx)   {
@@ -36,6 +38,8 @@ public class TxFactory {
 
         if(instance == null)    {
             instance = new TxFactory();
+
+            messageIdx = PrefsUtil.getInstance(context).getValue(PrefsUtil.MESSAGE_IDX, 1);
         }
 
         return instance;
@@ -64,7 +68,13 @@ public class TxFactory {
 
         final Transaction tx = new Transaction(MainNetParams.get(), Hex.decode(strHexTx));
         String strRaw = strHexTx;
-        int id = 1000;
+        int id = messageIdx;
+
+        messageIdx++;
+        if(messageIdx > 9999)    {
+            messageIdx = 1;
+        }
+        PrefsUtil.getInstance(context).setValue(PrefsUtil.MESSAGE_IDX, messageIdx);
 
         for(int i = 0; i < count; i++)   {
 
