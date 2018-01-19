@@ -12,7 +12,7 @@ Import as Android Studio project. Should build "as is". PGP signed tagged releas
 
 ### APK:
 
-The latest version of the APK can be installed from the [Github Releases page](https://www.github.com)
+The latest version of the APK can be installed from the [Github Releases page](https://github.com/MuleTools/PonyDirect/releases)
 
 ## How to use
 
