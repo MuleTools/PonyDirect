@@ -39,9 +39,9 @@ The format used is a simple JSON object for each SMS. Each SMS transmits a segme
 | s    | *integer*, number of SMS segments for this transaction. Only used in the first SMS for a given transaction. |
 | h    | hash of the transaction. Only used in the first SMS for a given transaction. |
 | n    | **optional**, network to use. 't' for TestNet3, otherwise assume MainNet. |
-| i    | *integer*, Pony Direct payload ID (0-9999). |
+| i    | *integer*, Pony Direct payload ID (1-9999). |
 | c    | *integer*, sequence number for this SMS. Should be zero if first SMS for a given transaction. |
-| t    | hex transaction data or this segment.    |
+| t    | hex transaction data for this segment.    |
 
 **Sample** (1 transaction, 5 SMS)
 
