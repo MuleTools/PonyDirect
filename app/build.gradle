@@ -39,4 +39,5 @@ dependencies {
     compile 'commons-io:commons-io:2.5'
     compile 'org.json:json:20140107'
     compile 'com.google.guava:guava:20.0'
+    compile 'com.yanzhenjie.zbar:camera:1.0.0'
 }
