@@ -10,7 +10,6 @@ import android.util.Log;
 import com.samourai.sms.SMSSender;
 
 import org.apache.commons.io.IOUtils;
-import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Transaction;
 import org.bitcoinj.params.MainNetParams;
 import org.bitcoinj.params.TestNet3Params;

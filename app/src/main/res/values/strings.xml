@@ -22,8 +22,8 @@
     <string name="options_mainnet2">Use MainNet for broadcast (uncheck to use TestNet)</string>
     <string name="use_intl_format">Use international dialing format. Ex.:\'+447385555555\'</string>
 
-    <string name="permission_alert_dialog_title">Requesting SMS permission</string>
-    <string name="permission_dialog_message">The app will now request your permission to send and read SMS related services.</string>
+    <string name="permission_alert_dialog_title">Requesting permissions</string>
+    <string name="permission_dialog_message">The app will now request your permission to send and read SMS and use camera for scanning QR codes.</string>
 
     <string name="sending">sending</string>
     <string name="broadcasted">broadcasted</string>
