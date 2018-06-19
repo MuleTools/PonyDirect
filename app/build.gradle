@@ -6,8 +6,8 @@ android {
         applicationId "com.samourai.ponydirect"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 3
-        versionName "0.03"
+        versionCode 4
+        versionName "0.04"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
