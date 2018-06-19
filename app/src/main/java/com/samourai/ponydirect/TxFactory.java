@@ -212,7 +212,7 @@ public class TxFactory {
 
                 for(int i = 0; i < payload.size(); i++)   {
 
-                    String s = payload.get(i);
+                    final String s = payload.get(i);
 
                     final int ii = i + 1;
 
@@ -223,7 +223,7 @@ public class TxFactory {
                             @Override
                             public void run() {
                                 Intent intent = new Intent("com.samourai.ponydirect.LOG");
-                                intent.putExtra("msg", context.getText(R.string.sent_sms) + ", " + ii + "/" + payload.size());
+                                intent.putExtra("msg", context.getText(R.string.sent_sms) + ", " + ii + "/" + payload.size() + ":" + s);
                                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                             }
                         });
