@@ -59,6 +59,21 @@ public class SettingsActivity extends PreferenceActivity	{
             }
         });
 
+        final CheckBoxPreference cbZ85 = (CheckBoxPreference) findPreference("z85");
+        cbZ85.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                if (cbZ85.isChecked()) {
+                    PrefsUtil.getInstance(SettingsActivity.this).setValue(PrefsUtil.USE_Z85, false);
+                }
+                else {
+                    PrefsUtil.getInstance(SettingsActivity.this).setValue(PrefsUtil.USE_Z85, true);
+                }
+
+                return true;
+            }
+        });
+
         Preference aboutPref = (Preference) findPreference("about");
         aboutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
