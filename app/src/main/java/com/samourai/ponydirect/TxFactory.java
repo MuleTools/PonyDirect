@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class TxFactory {
@@ -47,16 +48,27 @@ public class TxFactory {
     public List<String> putPayload(String strHexTx)   {
 
         final int segment0Len = 40;
-        final int segment1Len = 130;
+        final int segment1Len = 120;
 
         List<String> ret = new ArrayList<String>();
 
+        final Transaction tx = new Transaction(MainNetParams.get(), Hex.decode(strHexTx));
+        String strRaw = null;
+        if(PrefsUtil.getInstance(context).getValue(PrefsUtil.USE_Z85, false) == true)    {
+            strRaw = Z85.getInstance().encode(Hex.decode(strHexTx));
+        }
+        else    {
+            strRaw = strHexTx;
+        }
+        Log.d("TxFactory", "hex tx:" + strHexTx);
+        Log.d("TxFactory", "hex tx Z85:" + strRaw);
+
         int count = 0;
-        if(strHexTx.length() <= segment0Len)    {
+        if(strRaw.length() <= segment0Len)    {
             count = 1;
         }
         else    {
-            int len = strHexTx.length();
+            int len = strRaw.length();
             len -= segment0Len;
             count = 1;
             count += (len / segment1Len);
@@ -65,8 +77,6 @@ public class TxFactory {
             }
         }
 
-        final Transaction tx = new Transaction(MainNetParams.get(), Hex.decode(strHexTx));
-        String strRaw = strHexTx;
         int id = messageIdx;
 
         messageIdx++;
@@ -113,7 +123,7 @@ public class TxFactory {
         }
 
         for(String s : ret)   {
-            Log.d("MainActivity", "payload:" + s);
+            Log.d("TxFactory", "payload:" + s);
         }
 
         Handler handler = new Handler();
@@ -191,11 +201,16 @@ public class TxFactory {
 
         }
 
-        Log.d("MainActivity", "payload:" + txHex);
+        if(Z85.getInstance().isZ85(txHex))    {
+            Log.d("TxFactory", "payload encoded:" + txHex);
+            String _txHex = Hex.toHexString(Z85.getInstance().decode(txHex));
+            Log.d("TxFactory", "payload decoded:" + _txHex);
+            txHex = _txHex;
+        }
 
         Transaction tx = new Transaction((net != null && net.equals("t")) ? TestNet3Params.get() : MainNetParams.get(), Hex.decode(txHex));
         assert(tx.getHashAsString().equalsIgnoreCase(hash));
-        Log.d("MainActivity", "payload:" + tx.getHashAsString());
+        Log.d("TxFactory", "payload:" + tx.getHashAsString());
 
         return txHex;
     }
@@ -216,7 +231,7 @@ public class TxFactory {
 
                     final int ii = i + 1;
 
-                    SMSSender.getInstance(context).send(s, PrefsUtil.getInstance(context).getValue(PrefsUtil.SMS_RELAY, "+447490741539"));
+                    SMSSender.getInstance(context).send(s, PrefsUtil.getInstance(context).getValue(PrefsUtil.SMS_RELAY, context.getString(R.string.default_relay)));
 
                     try {
                         handler.post(new Runnable() {
