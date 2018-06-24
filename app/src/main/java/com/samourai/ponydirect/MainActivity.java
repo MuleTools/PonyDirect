@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -30,18 +29,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.bitcoinj.core.Transaction;
-import org.bitcoinj.crypto.MnemonicException;
 import org.bitcoinj.params.MainNetParams;
 import org.bouncycastle.util.encoders.Hex;
-import org.json.JSONException;
 
 import com.dm.zbar.android.scanner.ZBarConstants;
 import com.dm.zbar.android.scanner.ZBarScannerActivity;
 import com.samourai.sms.SMSReceiver;
 
-import net.sourceforge.zbar.Symbol;
-
-import java.io.IOException;
+import com.yanzhenjie.zbar.Symbol;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvLog = null;
 
-    private static final int SMS_PERMISSION_CODE = 0;
+    private static final int PERMISSIONS_CODE = 0;
 
     public static final String ACTION_INTENT = "com.samourai.ponydirect.LOG";
     protected BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(!hasReadSmsPermission() || !hasSendSmsPermission()) {
+        if(!hasReadSmsPermission() || !hasSendSmsPermission() || !hasCameraPermission()) {
             showRequestPermissionsInfoAlertDialog();
         }
 
@@ -309,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                requestSmsPermission();
+                requestPermissions();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -331,15 +326,21 @@ public class MainActivity extends AppCompatActivity {
         return ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void requestSmsPermission() {
+    private boolean hasCameraPermission() {
+        return ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.SEND_SMS) &&
-                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_SMS)) {
+                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_SMS) &&
+                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CAMERA)
+                ) {
             Log.d("MainActivity", "shouldShowRequestPermissionRationale(), no permission requested");
             return;
         }
 
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS}, SMS_PERMISSION_CODE);
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS, Manifest.permission.CAMERA}, PERMISSIONS_CODE);
 
     }
 

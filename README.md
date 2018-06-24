@@ -43,7 +43,7 @@ The format used is a simple JSON object for each SMS. Each SMS transmits a segme
 | c    | *integer*, sequence number for this SMS. Should be zero if first SMS for a given transaction. |
 | t    | hex transaction data for this segment.    |
 
-**Sample** (1 transaction, 5 SMS)
+**Sample** (1 transaction, 5 SMS, hex encoded)
 
 ```json
 {
@@ -76,6 +76,41 @@ The format used is a simple JSON object for each SMS. Each SMS transmits a segme
 	"c":4,
 	"i":1000,
 	"t":"000000"
+}
+```
+
+### Z85 encoding
+
+Z85 encoding of transaction data can be selected in the settings. This will result in 40% less data in the transmitted payload and fewer outgoing SMS for a sender. A receiver will detect incoming Z85 data and decode accordingly.
+
+**Sample** (1 transaction, 4 SMS, Z85 encoded)
+
+```json
+{
+	"s":4,
+	"c":0,
+	"i":30,
+	"n":"t",
+	"h":"31fe18833073f818846ef56d663920f835b84ec5a9a28a18dd13b7da0f7339ae",
+	"t":"0rr910099?BH{)mCfen5Qmo<?G*.8{pqa2YWg7Wz"
+}
+
+{
+	"c":1,
+	"i":30,
+	"t":"tdsyFxcu*E0000n7624Wwh)}]4]@+D.]z!8sa@W<+GzQt%nS92f<Gn}000007Pwapa.v!NI%<&{zRotVY}net9Y?P40f\/u+000007Pw9vOAa>sv23If5M([."
+}
+
+{
+	"c":2,
+	"i":30,
+	"t":"93h2h[v4ng0.j}j0W8+z}Mxm3hzK7p?]+pAhUQM6Zra^h<lT-?V+[8G@jSjPf\/:o[:UUK=P?Hn%6E4KQ=9mO:mYRQdX*34nNu$Y<0u?Kdk6l?@1FhE]^BHSJ"
+}
+
+{
+	"c":3,
+	"i":30,
+	"t":"!FQy>-*Y=0I1tEqp85]MTn}O!0000"
 }
 ```
 

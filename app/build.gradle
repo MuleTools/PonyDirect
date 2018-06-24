@@ -6,8 +6,8 @@ android {
         applicationId "com.samourai.ponydirect"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 2
-        versionName "0.02"
+        versionCode 5
+        versionName "0.05"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -39,4 +39,5 @@ dependencies {
     compile 'commons-io:commons-io:2.5'
     compile 'org.json:json:20140107'
     compile 'com.google.guava:guava:20.0'
+    compile 'com.yanzhenjie.zbar:camera:1.0.0'
 }

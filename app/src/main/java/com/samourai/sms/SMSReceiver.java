@@ -54,7 +54,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 String incomingTelNo = null;
                 int id = -1;
                 for(SmsMessage currentMessage : messages)	{
-                    String msg = currentMessage.getDisplayMessageBody().trim().toLowerCase();
+                    String msg = currentMessage.getDisplayMessageBody().trim();
                     incomingTelNo = currentMessage.getDisplayOriginatingAddress();
 
                     if(seen.contains(incomingTelNo + ":" + msg))    {
