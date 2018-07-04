@@ -37,18 +37,17 @@ The format used is a simple JSON object for each SMS. Each SMS transmits a segme
 | Name | Description                              |
 | ---- | ---------------------------------------- |
 | s    | *integer*, number of SMS segments for this transaction. Only used in the first SMS for a given transaction. |
-| h    | hash of the transaction. Only used in the first SMS for a given transaction. |
+| h    | hash of the transaction. Only used in the first SMS for a given transaction. May be Z85-encoded. |
 | n    | **optional**, network to use. 't' for TestNet3, otherwise assume MainNet. |
 | i    | *integer*, Pony Direct payload ID (1-9999). |
-| c    | *integer*, sequence number for this SMS. Should be zero if first SMS for a given transaction. |
-| t    | hex transaction data for this segment.    |
+| c    | *integer*, sequence number for this SMS. May be omitted in first SMS for a given transaction (assumed to be 0). |
+| t    | hex transaction data for this segment. May be Z85-encoded.    |
 
 **Sample** (1 transaction, 5 SMS, hex encoded)
 
 ```json
 {
 	"s":5,
-	"c":0,
 	"i":1000,
 	"h":"fa6ffa1b50c7638c692de20b9a6a0e2f7d5ae760c05201fc3307b1f9f84e020d",
 	"t":"0100000001c69b800a73bf8016aef958994a4a1227849122d3"
@@ -88,7 +87,6 @@ Z85 encoding of transaction data can be selected in the settings. This will resu
 ```json
 {
 	"s":4,
-	"c":0,
 	"i":30,
 	"n":"t",
 	"h":"31fe18833073f818846ef56d663920f835b84ec5a9a28a18dd13b7da0f7339ae",

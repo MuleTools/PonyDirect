@@ -52,7 +52,7 @@ public class TxFactory {
 
         List<String> ret = new ArrayList<String>();
 
-        final Transaction tx = new Transaction(MainNetParams.get(), Hex.decode(strHexTx));
+        final Transaction tx = new Transaction(PrefsUtil.getInstance(context).getValue(PrefsUtil.USE_MAINNET, true) == true ? MainNetParams.get() : TestNet3Params.get(), Hex.decode(strHexTx));
         String strRaw = null;
         if(PrefsUtil.getInstance(context).getValue(PrefsUtil.USE_Z85, false) == true)    {
             strRaw = Z85.getInstance().encode(Hex.decode(strHexTx));

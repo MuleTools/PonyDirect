@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Pony Direct</string>
-    <string name="version_name">0.05</string>
     <string name="action_settings">Settings</string>
     <string name="about_us">About Pony Express</string>
     <string name="about_title">About us</string>
