@@ -4,6 +4,8 @@ Pony Direct is a proof-of-concept Android app developed by [Samourai](https://sa
 
 Pony Direct can be used for transmitting transactions to the bitcoin network via SMS. Send your own transactions by SMS using a known Pony Relay or allow your own contacts to use your mobile number as an SMS relay.
 
+Pony Direct functionality has been rolled into [txTenna](https://github.com/MuleTools/txTenna). txTenna maintains backward compatibility for the Pony Direct SMS payload format describe below.
+
 ## Get Started
 
 ### Build:
@@ -126,7 +128,7 @@ We highly encourage PR's and contributions to this proof-of-concept. Below are s
 
 ### License:
 
-[Unlicense](https://github.com/Samourai-Wallet/samourai-wallet-android/blob/master/LICENSE)
+[Unlicense](https://github.com/MuleTools/PonyDirect/blob/develop/LICENSE)
 
 ### Contributing:
 
